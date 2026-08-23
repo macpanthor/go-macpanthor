@@ -1,0 +1,13 @@
+{
+  "name": "go.macpanthor.com — URL Shortener",
+  "short_name": "go.macpanthor",
+  "description": "Self-hosted short links & QR codes for macpanthor.com",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    { "src": "/assets/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

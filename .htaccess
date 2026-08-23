@@ -1,0 +1,19 @@
+# go.macpanthor.com — Apache configuration
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Serve existing files and directories directly
+    # (index.php, insert.php, qr.php, r.php, assets/, qrcodes/, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Clean short URLs:  /{code}  ->  r.php?c={code}   (no visible query string)
+    RewriteRule ^([A-Za-z0-9_-]{1,10})/?$ r.php?c=$1 [L,QSA]
+</IfModule>
+
+# Branded 404 page for unmatched paths
+ErrorDocument 404 /r.php?c=

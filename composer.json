@@ -1,0 +1,13 @@
+{
+    "name": "macpanthor/go-shortener",
+    "description": "Self-hosted URL shortener + QR code generator for go.macpanthor.com",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "endroid/qr-code": "^4.0"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
