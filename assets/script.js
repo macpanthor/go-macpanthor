@@ -8,6 +8,7 @@
   var resultBox = document.getElementById('result');
   var shortUrlInput = document.getElementById('short-url');
   var qrImg = document.getElementById('qr-img');
+  var downloadBtn = document.getElementById('download-btn');
   var copyBtn = document.getElementById('copy-btn');
   var copyStatus = document.getElementById('copy-status');
   var errorBox = document.getElementById('error');
@@ -38,6 +39,9 @@
           }
           shortUrlInput.value = data.short_url;
           qrImg.src = 'qr.php?c=' + encodeURIComponent(data.code);
+          qrImg.onload = function () {
+            downloadBtn.disabled = false;
+          };
           copyStatus.textContent = '';
           show(resultBox);
         });
@@ -48,6 +52,41 @@
       .finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Shorten URL';
+      });
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    var href = qrImg.src;
+    if (!href || downloadBtn.disabled) return;
+
+    var filename = 'qr-code.png';
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Downloading…';
+
+    fetch(href)
+      .then(function (res) {
+        if (!res.ok) throw new Error('Download failed.');
+        return res.blob();
+      })
+      .then(function (blob) {
+        var objectUrl = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = objectUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(objectUrl);
+      })
+      .catch(function () {
+        // Fallback: direct navigation to the image triggers the browser save dialog.
+        window.location.href = href;
+      })
+      .finally(function () {
+        downloadBtn.disabled = false;
+        downloadBtn.textContent = 'Download QR code';
+        // If a new QR is generated later, it stays enabled via its onload handler.
+        if (!qrImg.complete) downloadBtn.disabled = true;
       });
   });
 

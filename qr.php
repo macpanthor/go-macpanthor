@@ -46,8 +46,8 @@ if (class_exists('Endroid\QrCode\Builder\Builder')) {
         ->encoding(new \Endroid\QrCode\Encoding\Encoding('UTF-8'))
         ->size(300)
         ->margin(10)
-        ->foregroundColor(new \Endroid\QrCode\Color\Color(0, 229, 255))
-        ->backgroundColor(new \Endroid\QrCode\Color\Color(13, 13, 13))
+        ->foregroundColor(new \Endroid\QrCode\Color\Color(0, 0, 0))
+        ->backgroundColor(new \Endroid\QrCode\Color\Color(255, 255, 255))
         ->validateResult(false)
         ->build();
 
@@ -56,7 +56,7 @@ if (class_exists('Endroid\QrCode\Builder\Builder')) {
     // Fallback: single-file phpqrcode library (requires PHP GD).
     require_once __DIR__ . '/lib/phpqrcode/qrlib.php';
     ob_start();
-    QRcode::png($target, false, QR_ECLEVEL_M, 10, 2, false, [13, 13, 13], [0, 229, 255]);
+    QRcode::png($target, false, QR_ECLEVEL_M, 10, 2, false, [255, 255, 255], [0, 0, 0]);
     $png = (string) ob_get_clean();
 } else {
     http_response_code(500);

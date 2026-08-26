@@ -140,8 +140,20 @@ button:active { transform: translateY(1px); }
   height: auto;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: #0d0d0d;
+  background: #ffffff;
 }
+
+.download-btn {
+  width: 100%;
+  margin-top: 1rem;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.75rem 1.25rem;
+}
+
+.download-btn:hover:not(:disabled) { background: var(--accent-dim); }
+.download-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .error {
   border-color: rgba(255, 82, 82, 0.5);

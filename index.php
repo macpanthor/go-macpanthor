@@ -46,6 +46,7 @@
 
       <label>QR code</label>
       <img id="qr-img" src="" alt="QR code" class="qr">
+      <button type="button" id="download-btn" class="download-btn" disabled>Download QR code</button>
     </div>
   </main>
 
